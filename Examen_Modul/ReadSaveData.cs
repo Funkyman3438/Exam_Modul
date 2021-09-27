@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exam_Modul
+namespace Examen_Modul 
 {
     public struct Item : IComparable<Item>
     {

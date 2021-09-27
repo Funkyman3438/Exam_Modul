@@ -5,12 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Examen_Modul
+namespace Examen_Modul 
 {
     class PathFinder
     {
+        string readPath;
+        string savePath;
+        public PathFinder(string readPath, string savePath)
+        {
+            this.readPath = readPath;
+            this.savePath = savePath;
+        }
+
         List<Activity> activities = new List<Activity>(); //Список всех работ (в графике это дуги)
         List<Path> pathes = new List<Path>(); //Список всех путей
+
         int FindStartingPos() //Метод для поиска начальной точки
         {
             foreach (Activity activity in activities) //Если нет таких дуг, которые бы входили в данную точку, то она начальная.
@@ -24,6 +33,7 @@ namespace Examen_Modul
                 if (activities.Where(x => x.eventStart == activity.eventEnd).Count() == 0) return activity.eventEnd;
             return -1;
         }
+
         void CalculatePathes() //Метод подсчета путей
         {
             foreach (Activity activity in activities.Where(x => x.eventStart == FindStartingPos())) //Сначала в список путей заносятся все начальные дуги
@@ -39,6 +49,7 @@ namespace Examen_Modul
                 }
             }
         }
+
         Path FindCriticalPath() //Метод поиска критического пути
         {
             int maxLength = 0;
@@ -61,5 +72,22 @@ namespace Examen_Modul
             return minimalPath;
         }
 
+
+        public void CalculateCriticalPath()
+        {
+            ReadSaveData.ReadData(readPath, ref activities);
+            CalculatePathes();
+            var criticalPath = FindCriticalPath();
+            ReadSaveData.WriteToFile(savePath, criticalPath);
+            pathes.Clear();
+        }
+        public void CalculateMinimalPath()
+        {
+            ReadSaveData.ReadData(readPath, ref activities);
+            CalculatePathes();
+            var minimalPath = FindMinimalPath();
+            ReadSaveData.WriteToFile(savePath, minimalPath);
+            pathes.Clear();
+        }
     }
 }

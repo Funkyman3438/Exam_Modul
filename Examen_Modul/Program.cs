@@ -10,7 +10,8 @@ namespace Examen_Modul
     {
         static void Main(string[] args)
         {
-
+            var pf = new PathFinder("Zadacha.csv", "CritPut.txt"); //Здесь происходит запуск программы
+            pf.CalculateCriticalPath();
         }
     }
 }
