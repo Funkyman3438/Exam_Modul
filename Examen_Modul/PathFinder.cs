@@ -39,6 +39,27 @@ namespace Examen_Modul
                 }
             }
         }
+        Path FindCriticalPath() //Метод поиска критического пути
+        {
+            int maxLength = 0;
+            foreach (Path path in pathes.Where(x => x.lastPoint == FindEndingPos())) //Проверяет все пути, конечная точка которых совпадает с концом сети
+            {
+                if (path.length > maxLength) maxLength = path.length; //Вычисляет самый длинный путь из представленных
+            }
+            Path criticalPath = pathes.Find(x => x.length == maxLength); //И возвращает его
+            return criticalPath;
+        }
+
+        Path FindMinimalPath() //Метод поиска минимального пути
+        {
+            int minLength = int.MaxValue;
+            foreach (Path path in pathes.Where(x => x.lastPoint == FindEndingPos()))
+            {
+                if (path.length < minLength) minLength = path.length; //То же самое, но ищет минимальный
+            }
+            Path minimalPath = pathes.Find(x => x.length == minLength);
+            return minimalPath;
+        }
 
     }
 }
