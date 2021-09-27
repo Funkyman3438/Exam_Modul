@@ -24,6 +24,21 @@ namespace Examen_Modul
                 if (activities.Where(x => x.eventStart == activity.eventEnd).Count() == 0) return activity.eventEnd;
             return -1;
         }
+        void CalculatePathes() //Метод подсчета путей
+        {
+            foreach (Activity activity in activities.Where(x => x.eventStart == FindStartingPos())) //Сначала в список путей заносятся все начальные дуги
+            {
+                pathes.Add(new Path { path = activity.eventStart + "--" + activity.eventEnd, lastPoint = activity.eventEnd, length = activity.time });
+            }
+            for (int i = 0; i < pathes.Count; i++) //Затем программа начинает обход по всем записанным путям (в ходе выполнения цикла их количество пополняется)
+            {
+                foreach (Activity activity in activities.Where(x => x.eventStart == pathes[i].lastPoint)) //В список путей заносятся новые пути, которые исходят из проверяемого в данных момент
+                {
+                    //Таким образом в список заносятся все промежуточные пути
+                    pathes.Add(new Path { path = pathes[i].path + "--" + activity.eventEnd, lastPoint = activity.eventEnd, length = pathes[i].length + activity.time });
+                }
+            }
+        }
 
     }
 }
