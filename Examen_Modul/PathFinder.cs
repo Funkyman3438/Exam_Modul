@@ -57,7 +57,7 @@ namespace Examen_Modul
             {
                 if (path.length > maxLength) maxLength = path.length; //Вычисляет самый длинный путь из представленных
             }
-            Path criticalPath = pathes.Find(x => x.length == maxLength); //И возвращает его
+            Path criticalPath = pathes.Find(x => x.length == maxLength); //Возвращает самый длинный путь
             return criticalPath;
         }
 
@@ -66,7 +66,7 @@ namespace Examen_Modul
             int minLength = int.MaxValue;
             foreach (Path path in pathes.Where(x => x.lastPoint == FindEndingPos()))
             {
-                if (path.length < minLength) minLength = path.length; //То же самое, но ищет минимальный
+                if (path.length < minLength) minLength = path.length; //Ищет минимальный
             }
             Path minimalPath = pathes.Find(x => x.length == minLength);
             return minimalPath;

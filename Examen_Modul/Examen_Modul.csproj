@@ -52,10 +52,11 @@
     <None Include="App.config" />
     <None Include="Файл с математической моделью задачи\Zadacha.csv" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="UML диаграммы\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="UML диаграммы\Диаграмма вариантов использования.PNG" />
+    <Content Include="UML диаграммы\Диаграмма деятельности.PNG" />
+    <Content Include="UML диаграммы\Диаграмма потока данных.PNG" />
     <Content Include="Файл с решенной задачей\CritPut.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
